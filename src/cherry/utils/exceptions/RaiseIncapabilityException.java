@@ -25,11 +25,15 @@ package cherry.utils.exceptions;
 
 /**
  * This exception is thrown whenever a flag could not be raised by the FlagHandler.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class RaiseIncapabilityException extends Exception {
     /**
      * Constructs a new RaiseIncapabilityException with a reason and a cause.
+     * 
      * @param reason A explanation of what happened.
      * @param cause What caused this exception.
      */
@@ -37,12 +41,14 @@ public class RaiseIncapabilityException extends Exception {
 
     /**
      * Constructs a new RaiseIncapabilityException with only a reason.
+     * 
      * @param reason A explanation of what happened.
      */
     public RaiseIncapabilityException (String reason) { super(reason); }
 
     /**
      * Constructs a new RaiseIncapabilityException with only a cause.
+     * 
      * @param cause What caused this exception.
      */
     public RaiseIncapabilityException (Throwable cause) { super(cause); }

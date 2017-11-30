@@ -23,7 +23,11 @@
  */
 package cherry.frontend.lexer;
 
+// import cherry.frontend.grammar.Token;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The sole purpose of Lexer is to take a file and make sure that is has proper
@@ -60,7 +64,10 @@ import java.io.File;
  * transition to multiple states, we will need to do a slight lookahead to peek
  * at the value of the next character to decide the transition to take.
  * </p>
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public final class Lexer {
     /**
@@ -69,20 +76,7 @@ public final class Lexer {
      * {@code Lexer} can be in at any given time.
      */
     private enum State {
-        /** The start state of the {@code Lexer}. */
-        start(1),
-        /** The word state of the {@code Lexer}. */
-        word(2),
-        /** The number state of the {@code Lexer}. */
-        number(3),
-        /** The literal state of the {@code Lexer}. */
-        literal(4),
-        /** The symbol state of the {@code Lexer}. */
-        symbol(5),
-        /** The error state of the {@code Lexer}. */
-        error(6),
-        /** The final state of the {@code Lexer}. */
-        stop(7);
+        start, word, number, literal, symbol, error, stop;
         
         /** The index of the state. */
         private final int index;
@@ -90,24 +84,19 @@ public final class Lexer {
         /**
          * Constructs each {@code State} value with an number corresponding to
          * its index.
+         * 
          * @param index The numbered index of this state.
          */
-        State (int index) { this.index = index; }
+        State () { this.index = this.ordinal(); }
         
         /**
          * Retrieves the index of this state.
+         * 
          * @return The number of this state.
          */
-        public int getStateNo () { return index; }
+        public int index () { return index; }
     }
     
-    /** Sets up the transition table. */
-    static {
-        transTable = buildTransitions();
-    }
-    
-    /** The transition table of the {@code Lexer}. */
-    private static final int[][] transTable;
     /** File that this Lexer will be reading. */
     private final File file;
     /** The reader for this Lexer. */
@@ -116,21 +105,11 @@ public final class Lexer {
     /**
      * Constructs a new Lexer to lex the file passed in from the Parser that
      * instantiated this Lexer instance.
+     * 
      * @param file The file to lex.
      */
     public Lexer (File file) {
         this.file = file;
         reader = new LexicalReader(file);
-    }
-    
-    /**
-     * Builds the corresponding transition table for the {@code Lexer}.
-     * @return A integer two dimensional array filled with every key and state
-     *      transition.
-     */
-    private static int[][] buildTransitions () {
-        int[][] result = new int[7][5];
-        // fill table
-        return result;
     }
 }

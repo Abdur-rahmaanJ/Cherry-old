@@ -26,11 +26,15 @@ package cherry.utils.exceptions;
 /**
  * This exception is thrown if for some reason the name of a flag fails to raise
  * its RuntimeFlag equivalent.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class FailureToRaiseException extends Exception {
     /**
      * Constructs a new FailureToRaiseException with a reason and a cause.
+     * 
      * @param reason A explanation of what happened.
      * @param cause What caused this exception.
      */
@@ -38,12 +42,14 @@ public class FailureToRaiseException extends Exception {
 
     /**
      * Constructs a new FailureToRaiseException with only a reason.
+     * 
      * @param reason A explanation of what happened.
      */
     public FailureToRaiseException (String reason) { super(reason); }
 
     /**
      * Constructs a new FailureToRaiseException with only a cause.
+     * 
      * @param cause What caused this exception.
      */
     public FailureToRaiseException (Throwable cause) { super(cause); }

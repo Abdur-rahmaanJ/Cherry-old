@@ -43,7 +43,10 @@ import java.util.Map;
  * conditions or sub-flags to raise. The latter is a short flag, used to raise
  * full flags as default and or convenience.
  * </p>
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public final class FlagHandler {
     /**
@@ -87,6 +90,7 @@ public final class FlagHandler {
          * Checks if a particular flag exists, or in other words, RuntimeFlag
          * contains a value with the name of the command line argument in
          * question.
+         * 
          * @param name The name of the command line argument being checked.
          * @throws FlagDoesNotExistException If the flag is not contained inside
          *			of {@code mappedFlags}.
@@ -129,6 +133,7 @@ public final class FlagHandler {
     /**
      * Constructs the FlagHandler with the command line flags that should be
      * raised if they so exist.
+     * 
      * @param flags The command line flag strings that assumably represent
      *      a runtime flag.
      * @throws UnknownFlagException If the flag cannot be found in the mappedFlags.
@@ -176,6 +181,7 @@ public final class FlagHandler {
      * An encapsulation method, useful for raising an array of flags. All
      * flags should be checked for their existence before they are raised.
      * This method will not be responsible for that however.
+     * 
      * @param flagsToRaise Is the array of flags to raise, denoted by their
      *			name.
      * @throws RaiseIncapabilityException if a flag was not added to
@@ -201,6 +207,7 @@ public final class FlagHandler {
      * The flag can only be raised if the flag exists. Since every flag
      * should be checked before they are thrown, we should do that before
      * passing them to this method.
+     * 
      * @param flagToRaise Is the flag to raise.
      * @return {@code true} if the flag was placed into the EnumSet
      *			{@code raisedFlags}.

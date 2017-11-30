@@ -25,11 +25,15 @@ package cherry.utils.exceptions;
 
 /**
  * This exception is thrown if a flag is marked as unknown.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class UnknownFlagException extends Exception {
     /**
      * Constructs a new UnknownFlagException with a reason and a cause.
+     * 
      * @param reason A explanation of what happened.
      * @param cause What caused this exception.
      */
@@ -37,12 +41,14 @@ public class UnknownFlagException extends Exception {
 
     /**
      * Constructs a new UnknownFlagException with only a reason.
+     * 
      * @param reason A explanation of what happened.
      */
     public UnknownFlagException (String reason) { super(reason); }
 
     /**
      * Constructs a new UnknownFlagException with only a cause.
+     * 
      * @param cause What caused this exception.
      */
     public UnknownFlagException (Throwable cause) { super(cause); }

@@ -29,11 +29,15 @@ package cherry.utils.exceptions;
  * assumably, if the file has the wrong extension it is considered improper by
  * the compiler, but if it is not found then it poses a new problem, that we can
  * only describe to the user.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class FileNotProperException extends Exception {
     /**
      * Constructs a new FileNotProperException with a reason and a cause.
+     * 
      * @param reason A explanation of what happened.
      * @param cause What caused this exception.
      */
@@ -41,12 +45,14 @@ public class FileNotProperException extends Exception {
 
     /**
      * Constructs a new FileNotProperException with only a reason.
+     * 
      * @param reason A explanation of what happened.
      */
     public FileNotProperException (String reason) { super(reason); }
 
     /**
      * Constructs a new FileNotProperException with only a cause.
+     * 
      * @param cause What caused this exception.
      */
     public FileNotProperException (Throwable cause) { super(cause); }

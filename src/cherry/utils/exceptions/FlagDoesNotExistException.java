@@ -26,11 +26,15 @@ package cherry.utils.exceptions;
 /**
  * This exception is thrown when a flag is denounced as non-existent. This could
  * happen due to it being spelled incorrectly or being wrong in general.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class FlagDoesNotExistException extends Exception {
     /**
      * Constructs a new FlagDoesNotExistException with a reason and a cause.
+     * 
      * @param reason A explanation of what happened.
      * @param cause What caused this exception.
      */
@@ -38,12 +42,14 @@ public class FlagDoesNotExistException extends Exception {
 
     /**
      * Constructs a new FlagDoesNotExistException with only a reason.
+     * 
      * @param reason A explanation of what happened.
      */
     public FlagDoesNotExistException (String reason) { super(reason); }
 
     /**
      * Constructs a new FlagDoesNotExistException with only a cause.
+     * 
      * @param cause What caused this exception.
      */
     public FlagDoesNotExistException (Throwable cause) { super(cause); }

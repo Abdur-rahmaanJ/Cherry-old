@@ -35,7 +35,10 @@ import java.util.List;
  * parsed, and setting appropriate runtime flags not given by the user. For
  * ease of understanding; these flags could be debug informative, special
  * assembler instruction flags, or the like wise.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public final class FileHandler {
     private static File[] registeredFiles;
@@ -49,6 +52,7 @@ public final class FileHandler {
      * for one of the three available extensions: .ch, .ry, or .cherry; then it
      * will register that file with given information that the parser that will
      * parse it, needs to know.
+     * 
      * @param files The array of file names passed in via the command line.
      * @throws FileNotProperException If the file to be registered has an
      *			improper extension.
@@ -82,6 +86,7 @@ public final class FileHandler {
      * one of the three: .ch, .ry, or .cherry; then the file has an invalid file
      * extension. At which point the exception will be thrown and will most
      * likely be wrapped as a FileNotProperException.
+     * 
      * @param name A string representing the name of a file.
      * @throws InvalidFileExtensionException If the file name does not end with
      *			an appropriate file extension as deemed here: .ch, .ry, .cherry.
@@ -116,6 +121,7 @@ public final class FileHandler {
      * Since the {@code registeredFiles} are private, we must give particular
      * processes a chance to see it, mainly, the Main thread; whom will use it
      * to generate parser threads.
+     * 
      * @return The registered files.
      */
     public static final File[] getRegisteredFiles () { return registeredFiles; }

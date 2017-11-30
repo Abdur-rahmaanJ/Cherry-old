@@ -31,7 +31,6 @@ import cherry.utils.handlers.*;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +42,10 @@ import java.util.logging.Logger;
  * the flag handler altogether, then after the handlers are done, the compiler
  * will return with a success or an error. The process of the handlers include
  * sending each file off to be parsed.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class Cherry {
     

@@ -44,7 +44,10 @@ import java.io.File;
  * we can't fully escape it. However, the less there is, the more efficient this
  * compiler is, and the easier it is to debug or throw out parse trees that don't
  * truly produce an expected outcome.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public final class Parser implements Runnable {
     /** A reference to the file this Parser must parse. */

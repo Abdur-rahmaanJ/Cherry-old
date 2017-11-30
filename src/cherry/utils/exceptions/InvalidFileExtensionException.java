@@ -26,11 +26,15 @@ package cherry.utils.exceptions;
 /**
  * This exception is thrown when the extension of a file does not match the List
  * of extensions that the compiler accepts.
+ * 
  * @author SoraKatadzuma
+ * @version Alpha 0.0.1
+ * @since 11/20/2017
  */
 public class InvalidFileExtensionException extends Exception {
     /**
      * Constructs a new InvalidFileExtensionException with a reason and a cause.
+     * 
      * @param reason A explanation of what happened.
      * @param cause What caused this exception.
      */
@@ -38,12 +42,14 @@ public class InvalidFileExtensionException extends Exception {
 
     /**
      * Constructs a new InvalidFileExtensionException with only a reason.
+     * 
      * @param reason A explanation of what happened.
      */
     public InvalidFileExtensionException (String reason) { super(reason); }
 
     /**
      * Constructs a new InvalidFileExtensionException with only a cause.
+     * 
      * @param cause What caused this exception.
      */
     public InvalidFileExtensionException (Throwable cause) { super(cause); }
