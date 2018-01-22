@@ -17,6 +17,7 @@
             <word>lexemes</word>
             <word>lexer</word>
             <word>tokenization</word>
+            <word>trie's</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -23,6 +23,9 @@
  */
 package cherry.frontend.parser;
 
+import cherry.frontend.grammar.Token;
+import cherry.frontend.lexer.Lexer;
+import cherry.utils.SearchTree;
 import java.io.File;
 
 /**
@@ -49,35 +52,56 @@ import java.io.File;
  * @version Alpha 0.0.1
  * @since 11/20/2017
  */
-public final class Parser implements Runnable {
+public final class Parser {
     /** A reference to the file this Parser must parse. */
     private final File file;
     /** A reference to one instance of the parser generator. */
-    // StemParser parser = StemParser.clone();
+    StemParser parser = new StemParser();
+    /** The resulting ParseTree. */
+    private SearchTree parseTree;
 
     /**
      * Constructs a new Parser whom will parse the file passed in from the caller.
      * @param file The file to parse.
      */
-    public Parser (File file) { this.file = file; }
+    public Parser (File file) {
+        this.file = file;
+    }
 
     /**
-     * Inherited from Runnable. This version is responsible for running the
-     * lexer and parser generator processes. Once it has done that it will do
-     * semantic checks to assure that the information is proper.
+     * This version is responsible for running the lexer and parser generator
+     * processes. Once it has done that it will do semantic checks to assure
+     * that the information is proper.
      */
-    @Override
-    public void run () {
+    public void parse () {
         // Generate a lexer to lexically check the file that it has received.
-        // final Lexer lexer = new Lexer(file);
-        // lexer.lex();
+        final Lexer lexer = new Lexer(file);
+        lexer.lex();
+        Token[] tokens = lexer.getTokens();
+        
+        for (Token token : tokens) {
+            System.out.println(token.value());
+        }
+        
         // Use the parser reference in the instance fields to parse the tokens
         // found by the Lexer.
+        
         // parser.parse(lexer.getTokens());
+        
         // Take the result of parsing (a parse tree or multiple parse trees) and
         // do proper semantic checks on them. The parser output will be a List
         // of parse trees or just a single one depending on if it managed to
         // parse into two or more parse trees. However, we want to avoid this.
+        
         // finalizeParserOutput(parser.getOutput());
+    }
+    
+    /**
+     * Currently a place holder.
+     * 
+     * @return
+     */
+    public SearchTree parseTree () {
+        return null;
     }
 }

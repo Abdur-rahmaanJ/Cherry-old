@@ -24,13 +24,19 @@
 package cherry;
 
 import cherry.frontend.parser.Parser;
+import cherry.utils.SearchTree;
 import cherry.utils.exceptions.FailureToRaiseException;
 import cherry.utils.exceptions.FileNotProperException;
 import cherry.utils.exceptions.UnknownFlagException;
 import cherry.utils.handlers.*;
 import java.io.File;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +54,8 @@ import java.util.logging.Logger;
  * @since 11/20/2017
  */
 public class Cherry {
+    private static final ExecutorService PARSER_EXECUTOR =
+            Executors.newCachedThreadPool();
     
     /**
      * @param args The command line arguments.
@@ -68,10 +76,7 @@ public class Cherry {
         final String[] files = filesList.toArray(new String[0]);
         final String[] flags = flagsList.toArray(new String[0]);
         
-        // construct the handlers on their own threads.
-        Thread flagThread, fileThread;
-        
-        flagThread = new Thread (() -> {
+        Thread flagThread = new Thread (() -> {
             if (!flagsList.isEmpty()) {
                 try {
                     FlagHandler flagHandler = new FlagHandler(flags);
@@ -83,7 +88,7 @@ public class Cherry {
         
         flagThread.start();
         
-        fileThread = new Thread (() -> {
+        Thread fileThread = new Thread (() -> {
             if (!filesList.isEmpty()) {
                 try {
                     FileHandler fileHandler = new FileHandler(files);
@@ -99,42 +104,37 @@ public class Cherry {
         
         // Join the handler threads before continuing to work.
         try {
-            if (fileThread != null) { fileThread.join(); }
-            if (flagThread != null) { flagThread.join(); }
+            fileThread.join();
+            flagThread.join();
         } catch (InterruptedException ie) {
             Logger.getLogger(Cherry.class.getName()).log(Level.SEVERE, null, ie);
         }
         
         // Our officially registered files.
-        File[] registeredFiles = FileHandler.getRegisteredFiles();
-        // A list of the threads that we start so we can stop them before
-        // continuing with the rest of compilation.
-        List<Thread> threads = new LinkedList<>();
-
-        // Necessary objects for starting up the Parsing processes.
-        Thread thread;
-        Parser parser;
-        int count = 0;
-
-        // We must iterate over all of them and generate threads for each
-        // Instance of a Parser to get a file and parse it.
-        for (File concreteFile : registeredFiles) {
-            parser = new Parser(concreteFile);
-            thread = new Thread(parser, "Parser-" + count);
-            threads.add(thread);
-            thread.start();
-        }
-
-        // Once done creating the parsers iterate the threads and join them
-        // to this one so that the execution doesn't continue until all of
-        // the threads are done.
-        threads.forEach((Thread thrd) -> {
-            try { thrd.join(); }
-            catch (InterruptedException ie) {
-                Logger.getLogger(Cherry.class.getName()).log(Level.SEVERE, null, ie);
-            }
-        });
+        final File[] registeredFiles = FileHandler.getRegisteredFiles();
+        final Collection<Callable<SearchTree>> tasks = new LinkedList<>();
         
-        System.out.println("Success?");
+        for (File file : registeredFiles) {
+            tasks.add((Callable) () -> {
+                File fileToParse = file;
+                Parser parser = new Parser(file);
+                parser.parse();
+                return parser.parseTree();
+            });
+        }
+        
+        List<Future<SearchTree>> parseTrees;
+        
+        try {
+            parseTrees = PARSER_EXECUTOR.invokeAll(tasks);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Cherry.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        PARSER_EXECUTOR.shutdown();
+        
+        // Generate code with the following trees.
+        // Generator.generateCodeFor(parseTrees);
+        // Finish.
     }
 }
